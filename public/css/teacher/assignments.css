@@ -1,0 +1,188 @@
+/* General form styling */
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    gap: 20px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 700px; /* Adjusted width for the new fields */
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+/* Dropdown styling */
+select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+/* Input field styles */
+input[type="text"],
+input[type="file"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Adjust file input for more consistency */
+input[type="file"] {
+    padding: 5px;
+}
+
+/* Button styles */
+button {
+    padding: 12px 20px;
+    background-color: #5a67d8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #434190;
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Assignment list styling */
+#assignmentList {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.assignment {
+    display: flex;
+    flex-direction: column; /* Stack assignment contents vertically */
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.assignment:hover {
+    transform: translateY(-3px); /* Lift effect on hover */
+}
+
+/* Assignment button styles */
+.assignment button {
+    margin-left: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Update and delete button styles */
+.assignment button.update-btn {
+    background-color: #48bb78; /* Green for update */
+}
+
+.assignment button.delete-btn {
+    background-color: #e53e3e; /* Red for delete */
+}
+
+/* Hover effect for assignment buttons */
+.assignment button:hover {
+    opacity: 0.9;
+}
+
+/* Session fields styling */
+.session-field {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+/* Session field label styling */
+.session-field label {
+    font-weight: bold;
+}
+
+/* Wrapper for dynamically added session fields */
+#sessionFields {
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Styling for session display */
+.session-display {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 15px 0; /* Add space between sessions */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* For positioning delete button */
+}
+
+/* Position delete button to the right */
+.session-display .delete-session {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Aligns to the right */
+    padding: 5px 10px;
+    background-color: #e53e3e; /* Red for delete */
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.session-display .delete-session:hover {
+    opacity: 0.9;
+}
+
+/* Headings */
+h1, h2 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 5%;
+    color: #333;
+    font-size: 24px;
+}
+
+/* Responsive styling for the form */
+@media (max-width: 768px) {
+    .form {
+        padding: 30px;
+        max-width: 100%;
+    }
+
+    .assignment {
+        flex-direction: column; /* Stack assignment details for mobile view */
+        align-items: flex-start;
+    }
+
+    .assignment button {
+        margin-top: 10px; /* Space out buttons on mobile */
+    }
+
+    h1, h2 {
+        font-size: 22px; /* Slightly smaller headings for mobile */
+        margin-bottom: 15px;
+    }
+}

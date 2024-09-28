@@ -1,0 +1,92 @@
+/* =========== Google Fonts ============ */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+@import url("../color.css");
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    text-align: center;
+    padding: 30px;
+}
+
+.heading{
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #3e2d84;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.unit {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.unit-header {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #3e2d84;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.unit-header:hover {
+    background-color: #e8e4f8;
+    transform: translateY(-2px);
+}
+
+.subunit-list {
+    display: none;
+    padding-left: 20px;
+}
+
+.subunit {
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.subunit:hover {
+    transform: translateY(-5px);
+    background-color: #f0f0f5;
+}
+
+iframe {
+    width: 100%;
+    height: 600px;
+    margin-top: 30px;
+    border: none;
+}
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.btn {
+    background-color: #3e2d84;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #6454a7;
+}
