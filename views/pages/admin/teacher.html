@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      <%= title %>
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      body {
+        background-color: #f0f2f5;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .registration-container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        margin: 50px auto;
+        width: 70%;
+        position: relative;
+      }
+      .back-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #2a2185;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 18px;
+      }
+      .back-button:hover {
+        background-color: #645af5;
+      }
+      .form-header {
+        text-align: center;
+        color: #2a2185;
+        margin-bottom: 30px;
+      }
+      .form-header h2 {
+        font-weight: bold;
+      }
+      .btn-submit {
+        background-color: #2a2185;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        width: 10%;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+      .btn-submit:hover {
+        background-color: #645af5;
+      }
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+      }
+      .section-header {
+        font-size: 1.5rem;
+        color: #2a2185;
+        margin-bottom: 20px;
+        font-weight: bold;
+        border-bottom: 2px solid #2980b9;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="number"],
+      select,
+      input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid registration-container">
+      <a href="/admin" class="back-button">&larr;</a>
+
+      <div class="form-header">
+        <h2>Teacher Registration</h2>
+        <p>Fill in the details below to register teacher.</p>
+      </div>
+
+      <form id="registrationTeacherForm" name="registrationTeacherForm">
+        <!-- Personal Details Section -->
+        <div class="section-header">Personal Details</div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="fullName" name="fullName"
+                placeholder="Enter full name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email" name="email"
+                placeholder="Enter email address"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phoneNumber" name="phoneNumber"
+                placeholder="Enter phone number"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address" name="address"
+                placeholder="Enter address"
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="gender" class="form-label" >Gender</label>
+              <select class="form-select" id="gender"  name="gender" required>
+                <option value="" disabled selected>Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="birthday" class="form-label">Birthday</label>
+              <input type="date" class="form-control" id="birthday" name="birthday" required />
+            </div>
+            <div class="mb-3">
+              <label for="age" class="form-label">Age</label>
+              <input type="number" class="form-control" id="age" name="age" placeholder="Age" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Dropdowns for State, District, City, Taluka -->
+        <div class="section-header">Location Details</div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="state" class="form-label" >State</label>
+              <select class="form-select" id="state" name="state" required>
+                <option value="" disabled selected>Select State</option>
+                <!-- State options will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="district" class="form-label">District</label>
+              <select class="form-select" id="district" name="district" required disabled>
+                <option value="" disabled selected>Select District</option>
+                <!-- District options will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="city" class="form-label">City</label>
+              <select class="form-select" id="city" name="city" required disabled>
+                <option value="" disabled selected>Select City</option>
+                <!-- City options will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="taluka" class="form-label">Taluka</label>
+              <select class="form-select" id="taluka" name="taluka" required disabled>
+                <option value="" disabled selected>Select Taluka</option>
+                <!-- Taluka options will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education Details Section -->
+        <div class="section-header">Education Details</div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="yearsOfExperience" class="form-label"
+                >Years of Experience</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="yearsOfExperience"
+                name="yearsOfExperience"
+                placeholder="Enter years of experience"
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="educationalQualification" class="form-label"
+                >Educational Qualification</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="educationalQualification"
+                name="educationalQualification"
+                placeholder="Enter educational qualification"
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="divisionToTeach" class="form-label"
+                >Division to Teach</label
+              >
+              <select class="form-select" id="divisionToTeach" name="divisionToTeach"  required>
+                <option value="" disabled selected>Select division</option>
+                <option value="primary">Primary</option>
+                <option value="secondary">Secondary</option>
+                <option value="higher_secondary">Higher Secondary</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- School Details Section -->
+        <div class="section-header">School Details</div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="schoolName" class="form-label">School Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="schoolName"
+                name="schoolName"
+                placeholder="Enter school name"
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="schoolAddress" class="form-label"
+                >School Address</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="schoolAddress"
+                name="schoolAddress"
+                placeholder="Enter school address"
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="schoolType" class="form-label">School Type</label>
+              <select class="form-select" id="schoolType" name="schoolType" required>
+                <option value="" disabled selected>Select school type</option>
+                <option value="government">Government</option>
+                <option value="private">Private</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="boardOfEducation" class="form-label"
+                >Board of Education</label
+              >
+              <select class="form-select" id="boardOfEducation" name="boardOfEducation" required>
+                <option value="" disabled selected>Select board</option>
+                <option value="state">State Board</option>
+                <option value="cbse">CBSE</option>
+                <option value="icse">ICSE</option>
+                <option value="international">International</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="mediumOfInstruction" class="form-label"
+                >Medium of Instruction</label
+              >
+              <select class="form-select" id="mediumOfInstruction" name="mediumOfInstruction" required>
+                <option value="" disabled selected>Select medium</option>
+                <option value="english">English</option>
+                <option value="hindi">Hindi</option>
+                <option value="regional">Regional</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn-submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // Location data and dropdown handling (same as before)
+      const locationData = {
+        "Andhra Pradesh": {
+          Anantapur: {
+            Anantapur: ["Taluka 1", "Taluka 2"],
+            Hindupur: ["Taluka 3", "Taluka 4"],
+          },
+          Chittoor: {
+            Chittoor: ["Taluka 5", "Taluka 6"],
+            Tirupati: ["Taluka 7", "Taluka 8"],
+          },
+        },
+        "Arunachal Pradesh": {
+          Tawang: {
+            Tawang: ["Taluka 1", "Taluka 2"],
+            Lumla: ["Taluka 3", "Taluka 4"],
+          },
+          "West Kameng": {
+            Bomdila: ["Taluka 5", "Taluka 6"],
+            Dirang: ["Taluka 7", "Taluka 8"],
+          },
+        },
+        Assam: {
+          Dibrugarh: {
+            Dibrugarh: ["Taluka 1", "Taluka 2"],
+            Naharkatia: ["Taluka 3", "Taluka 4"],
+          },
+          Guwahati: {
+            Guwahati: ["Taluka 5", "Taluka 6"],
+            Dispur: ["Taluka 7", "Taluka 8"],
+          },
+        },
+        Bihar: {
+          Patna: {
+            Patna: ["Taluka 1", "Taluka 2"],
+            Danapur: ["Taluka 3", "Taluka 4"],
+          },
+          Gaya: {
+            Gaya: ["Taluka 5", "Taluka 6"],
+            "Bodh Gaya": ["Taluka 7", "Taluka 8"],
+          },
+        },
+        Chhattisgarh: {
+          Raipur: {
+            Raipur: ["Taluka 1", "Taluka 2"],
+            Abhanpur: ["Taluka 3", "Taluka 4"],
+          },
+          Durg: {
+            Durg: ["Taluka 5", "Taluka 6"],
+            Bhilai: ["Taluka 7", "Taluka 8"],
+          },
+        },
+        Goa: {
+          "North Goa": {
+            Panaji: ["Taluka 1", "Taluka 2"],
+            Mapusa: ["Taluka 3", "Taluka 4"],
+          },
+          "South Goa": {
+            Margao: ["Taluka 5", "Taluka 6"],
+            Vasco: ["Taluka 7", "Taluka 8"],
+          },
+        },
+        Gujarat: {
+          Ahmedabad: {
+            Ahmedabad: ["Taluka 1", "Taluka 2"],
+            Sanand: ["Taluka 3", "Taluka 4"],
+          },
+          Surat: {
+            Surat: ["Taluka 5", "Taluka 6"],
+            Navsari: ["Taluka 7", "Taluka 8"],
+          },
+        },
+        // Add other states here...
+        Maharashtra: {
+          Mumbai: {
+            "Mumbai City": ["Taluka 1", "Taluka 2"],
+            "Mumbai Suburban": ["Taluka 3", "Taluka 4"],
+          },
+          Pune: {
+            Pune: ["Taluka 5", "Taluka 6"],
+            Baramati: ["Taluka 7", "Taluka 8"],
+          },
+        },
+        "Tamil Nadu": {
+          Chennai: {
+            Chennai: ["Taluka 1", "Taluka 2"],
+            Tambaram: ["Taluka 3", "Taluka 4"],
+          },
+          Coimbatore: {
+            Coimbatore: ["Taluka 5", "Taluka 6"],
+            Pollachi: ["Taluka 7", "Taluka 8"],
+          },
+        },
+        "Uttar Pradesh": {
+          Lucknow: {
+            Lucknow: ["Taluka 1", "Taluka 2"],
+            Malihabad: ["Taluka 3", "Taluka 4"],
+          },
+          Kanpur: {
+            Kanpur: ["Taluka 5", "Taluka 6"],
+            Bithoor: ["Taluka 7", "Taluka 8"],
+          },
+        },
+        "West Bengal": {
+          Kolkata: {
+            Kolkata: ["Taluka 1", "Taluka 2"],
+            Howrah: ["Taluka 3", "Taluka 4"],
+          },
+          Darjeeling: {
+            Darjeeling: ["Taluka 5", "Taluka 6"],
+            Siliguri: ["Taluka 7", "Taluka 8"],
+          },
+        },
+      };
+
+      const stateSelect = document.getElementById("state");
+      const districtSelect = document.getElementById("district");
+      const citySelect = document.getElementById("city");
+      const talukaSelect = document.getElementById("taluka");
+
+      // Populate all states of India
+      for (const state in locationData) {
+        const option = document.createElement("option");
+        option.value = state;
+        option.text = state;
+        stateSelect.appendChild(option);
+      }
+
+      // Update districts based on selected state
+      stateSelect.addEventListener("change", function () {
+        districtSelect.innerHTML =
+          '<option value="" disabled selected>Select District</option>';
+        citySelect.innerHTML =
+          '<option value="" disabled selected>Select City</option>';
+        talukaSelect.innerHTML =
+          '<option value="" disabled selected>Select Taluka</option>';
+        districtSelect.disabled = false;
+        citySelect.disabled = true;
+        talukaSelect.disabled = true;
+
+        const selectedState = stateSelect.value;
+        for (const district in locationData[selectedState]) {
+          const option = document.createElement("option");
+          option.value = district;
+          option.text = district;
+          districtSelect.appendChild(option);
+        }
+      });
+
+      // Update cities based on selected district
+      districtSelect.addEventListener("change", function () {
+        citySelect.innerHTML =
+          '<option value="" disabled selected>Select City</option>';
+        talukaSelect.innerHTML =
+          '<option value="" disabled selected>Select Taluka</option>';
+        citySelect.disabled = false;
+        talukaSelect.disabled = true;
+
+        const selectedState = stateSelect.value;
+        const selectedDistrict = districtSelect.value;
+        for (const city in locationData[selectedState][selectedDistrict]) {
+          const option = document.createElement("option");
+          option.value = city;
+          option.text = city;
+          citySelect.appendChild(option);
+        }
+      });
+
+      // Update talukas based on selected city
+      citySelect.addEventListener("change", function () {
+        talukaSelect.innerHTML =
+          '<option value="" disabled selected>Select Taluka</option>';
+        talukaSelect.disabled = false;
+
+        const selectedState = stateSelect.value;
+        const selectedDistrict = districtSelect.value;
+        const selectedCity = citySelect.value;
+        const talukas =
+          locationData[selectedState][selectedDistrict][selectedCity];
+        talukas.forEach((taluka) => {
+          const option = document.createElement("option");
+          option.value = taluka;
+          option.text = taluka;
+          talukaSelect.appendChild(option);
+        });
+      });
+    </script>
+<script src="/js/teacherReg.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

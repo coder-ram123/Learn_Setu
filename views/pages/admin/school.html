@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5; /* Light grey background for the whole page */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+        }
+
+        .registration-container {
+            background-color: #ffffff; /* White background for the form */
+            padding: 40px;
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin: 50px auto;
+            width: 70%; /* Increased width for the form */
+            position: relative; /* To position the back button */
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #2a2185; /* Updated blue color */
+            color: white; /* White text */
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none; /* Remove underline from anchor */
+            font-size: 18px;
+        }
+
+        .back-button:hover {
+            background-color: #645af5; /* Darker shade on hover */
+        }
+
+        .form-header {
+            text-align: center;
+            color: #2a2185; /* Updated blue color */
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
+            font-weight: bold;
+        }
+
+        .btn-submit {
+            background-color: #2a2185; /* Updated blue color */
+            color: white; /* White text */
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            width: 10%; /* Reduced button width */
+            font-size: 16px; /* Larger font size */
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #645af5; /* Slightly darker shade of the blue color on hover */
+        }
+
+        label {
+            font-weight: bold; /* Bold labels for better readability */
+            display: block; /* Labels on a new line */
+            margin-bottom: 8px; /* Spacing below labels */
+        }
+
+        .section-header {
+            font-size: 1.5rem; /* Slightly larger font size */
+            color: #2a2185; /* Updated blue color */
+            margin-bottom: 20px;
+            font-weight: bold;
+            border-bottom: 2px solid #2980b9;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], select, input[type="file"] {
+            width: 100%; /* Full width fields */
+            padding: 8px; /* Padding for input fields */
+            border-radius: 5px; /* Rounded borders for input fields */
+            border: 1px solid #ccc; /* Light grey border */
+        }
+
+        input[type="file"] {
+            background-color: #f0f2f5; /* Light grey background for file input */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid registration-container">
+        <!-- Back Button -->
+        <a href="/admin" class="back-button">&larr; </a> <!-- Left arrow back button -->
+
+        <div class="form-header">
+            <h2>School Registration</h2>
+            <p>Fill in the details below to register your school.</p>
+        </div>
+        <form id="registrationSchoolForm" name="registrationSchoolForm">
+            <!-- School Details Section -->
+            <div class="section-header">School Details</div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="schoolName" class="form-label">School Name</label>
+                        <input type="text" class="form-control" id="schoolName" name="schoolName" placeholder="Enter your school name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="schoolType" class="form-label">School Type</label>
+                        <select class="form-select" id="schoolType" name="schoolType" required>
+                            <option value="" disabled selected>Select the type of school</option>
+                            <option value="primary">Primary</option>
+                            <option value="secondary">Secondary</option>
+                            <option value="highSchool">High School</option>
+                            <option value="college">College</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="boardOfEducation" class="form-label">Board of Education</label>
+                        <select class="form-select" id="boardOfEducation" name="boardOfEducation" required>
+                            <option value="" disabled selected>Select board of education</option>
+                            <option value="cbse">CBSE</option>
+                            <option value="icse">ICSE</option>
+                            <option value="stateBoard">State Board</option>
+                            <option value="internationalBoard">International Board</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="schoolAddress" class="form-label">School Address</label>
+                        <input type="text" class="form-control" id="schoolAddress" name="schoolAddress" placeholder="Enter your school address" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mediumOfInstruction" class="form-label">Medium of Instruction</label>
+                        <select class="form-select" id="mediumOfInstruction" name="mediumOfInstruction" required>
+                            <option value="" disabled selected>Select the medium of instruction</option>
+                            <option value="english">English</option>
+                            <option value="hindi">Hindi</option>
+                            <option value="regionalLanguage">Regional Language</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contactNumber" class="form-label">Contact Number</label>
+                        <input type="tel" class="form-control" id="contactNumber" name="contactNumber" placeholder="Enter your contact number" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Fields: School ID, School Email, Student Count, and Grades -->
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="schoolEmail" class="form-label">School Email</label>
+                        <input type="email" class="form-control" id="schoolEmail" name="schoolEmail" placeholder="Enter school email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentCount" class="form-label">Student Count</label>
+                        <input type="number" class="form-control" id="studentCount" name="studentCount" placeholder="Enter total number of students" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="schoolId" class="form-label">School ID</label>
+                        <input type="text" class="form-control" id="schoolId" name="schoolId" placeholder="Enter school ID" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="grades" class="form-label">Grades Offered</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="gradeStart" name="gradeStart" placeholder="From" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="gradeEnd" name="gradeEnd" placeholder="To" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Principal Details Section -->
+            <div class="section-header">Principal Details</div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="principalName" class="form-label">Principal Name</label>
+                        <input type="text" class="form-control" id="principalName" name="principalName" placeholder="Enter principal's name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="principalEmail" class="form-label">Principal Email</label>
+                        <input type="email" class="form-control" id="principalEmail" name="principalEmail" placeholder="Enter principal's email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="principalContactNumber" class="form-label">Principal Contact Number</label>
+                        <input type="tel" class="form-control" id="principalContactNumber" name="principalContactNumber" placeholder="Enter principal's contact number" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="principalQualification" class="form-label">Principal Qualification</label>
+                        <input type="text" class="form-control" id="principalQualification" name="principalQualification" placeholder="Enter principal's qualification" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="principalExperience" class="form-label">Principal Experience</label>
+                        <input type="text" class="form-control" id="principalExperience" name="principalExperience" placeholder="Enter principal's experience" required>
+                    </div>
+                    <!-- <div class="mb-3">
+                        <label for="principalPhoto" class="form-label">Principal Photo</label>
+                        <input type="file" class="form-control" id="principalPhoto" name="principalPhoto" accept="image/*" required>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script src="/js/schoolReg.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

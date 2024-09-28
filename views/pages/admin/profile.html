@@ -1,0 +1,41 @@
+<%- include('../../partials/student/header.html') %>
+<link rel="stylesheet" href="/css/student/profile.css">
+</head>
+
+<body>
+    <!-- Back Button to Dashboard -->
+    <div class="back-button-container">
+        <button class="back-button" onclick="window.location.href='/admin'">← Back to Dashboard</button>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-image">
+                <img src="/images/customer01.jpg" alt="Profile Picture">
+            </div>
+            <div class="profile-info">
+                <h1>John Doe</h1>
+                <p>Email: johndoe@example.com</p>
+                <p>Role: Admin</p>
+            </div>
+        </div>
+        <div class="profile-content">
+            <div class="profile-card">
+                <h2>Personal Information</h2>
+                <p><strong>Full Name:</strong> John Doe</p>
+                <p><strong>Date of Birth:</strong> January 1, 2010</p>
+                <p><strong>Parent's Contact Number:</strong> +1 234-567-8901</p>
+                <p><strong>Address:</strong> 123 Main Street, Taluka: Central, District: Anytown, State: Example State, USA</p>
+                <p><strong>School Name:</strong> ABC High School</p>
+                <p><strong>Standard:</strong> 8th Grade</p>
+            </div>
+            <div class="profile-card">
+                <h2>Progress Overview</h2>
+                <!-- <p><strong>Completed Courses:</strong> 5</p> -->
+                <p><strong>Achievements:</strong> 3 Badges</p>
+                <p><strong>Rank:</strong> Top 10%</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

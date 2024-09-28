@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 10px; 
+            border-top: 1px solid #ddd;
+            position: absolute;
+            width: 100%;
+            z-index: 10; 
+        }
+        .footer-above {
+            top: 0;
+            padding: 40px; 
+        }
+        .footer-below {
+            bottom: 0;
+            padding: 21px; 
+        }
+        .sketchfab-embed-wrapper {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 100px); 
+            margin-top: 60px; 
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+   
+    <footer class="footer footer-above">
+        <p>3D model </p>
+    </footer>
+
+    
+    <div class="sketchfab-embed-wrapper">
+        <iframe title="Chemistry Form 4 Unit 5 - Page 81 AR"  
+                src="https://sketchfab.com/models/bc5c87e9803746cdb2af2fa14acdb025/embed" 
+                allowfullscreen 
+                mozallowfullscreen="true" 
+                webkitallowfullscreen="true" 
+                allow="autoplay; fullscreen; xr-spatial-tracking" 
+                xr-spatial-tracking 
+                execution-while-out-of-viewport 
+                execution-while-not-rendered 
+                web-share>
+        </iframe>
+    </div>
+
+    <!-- Footer below content -->
+    <footer class="footer footer-below">
+        <p>we will add info here</p>
+    </footer>
+</body>
+</html>

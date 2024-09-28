@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Generator from Images</title>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .mcq {
+            margin-bottom: 20px;
+        }
+        .mcq p {
+            font-weight: bold;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 5px 0;
+        }
+        #score {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload an Image to Generate MCQs</h1>
+    <form id="image-upload" enctype="multipart/form-data">
+        <input type="file" id="image" accept="image/*" required />
+        <button type="submit">Upload Image</button>
+    </form>
+    <div id="mcq-container"></div>
+    <button id="submit-btn" style="display: none;">Submit Answers</button>
+    <div id="score"></div>
+
+    <script>
+        const imageInput = document.getElementById("image");
+        const form = document.getElementById("image-upload");
+        const submitButton = document.getElementById("submit-btn");
+        const scoreDisplay = document.getElementById("score");
+        let mcqs = [];
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const file = imageInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = async (event) => {
+                const img = new Image();
+                img.src = event.target.result;
+
+                img.onload = async () => {
+                    const { data: { text } } = await Tesseract.recognize(img, 'eng');
+                    mcqs = generateMCQs(text);
+                    displayMCQs(mcqs);
+                    submitButton.style.display = 'block'; // Show submit button after generating MCQs
+                };
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        function generateMCQs(text) {
+            const sentences = text.split('.').map(s => s.trim()).filter(s => s.length > 0);
+            const mcqs = sentences.map((sentence, index) => {
+                const correctAnswer = sentence; // Correct answer from the sentence
+                const wrongAnswers = sentences.filter((s, i) => i !== index).slice(0, 3); // Get three wrong answers
+                const options = [correctAnswer, ...wrongAnswers].sort(() => Math.random() - 0.5); // Shuffle options
+                return {
+                    question: `What is related to: "${sentence}"?`,
+                    options: options,
+                    answer: correctAnswer
+                };
+            });
+            return mcqs;
+        }
+
+        function displayMCQs(mcqs) {
+            const mcqContainer = document.getElementById('mcq-container');
+            mcqContainer.innerHTML = mcqs.map((mcq, index) => `
+                <div class="mcq">
+                    <p>${mcq.question}</p>
+                    <ul class="options">
+                        ${mcq.options.map((option) => `
+                            <li>
+                                <label>
+                                    <input type="radio" name="mcq-${index}" value="${option}"> ${option}
+                                </label>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
+
+        submitButton.addEventListener("click", () => {
+            let score = 0;
+            mcqs.forEach((mcq, index) => {
+                const selectedOption = document.querySelector(`input[name="mcq-${index}"]:checked`);
+                if (selectedOption && selectedOption.value === mcq.answer) {
+                    score++;
+                }
+            });
+            scoreDisplay.textContent = `Your score: ${score} out of ${mcqs.length}`;
+        });
+    </script>
+</body>
+</html>

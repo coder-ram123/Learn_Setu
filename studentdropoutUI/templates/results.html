@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px; /* Adjust the max width as needed */
+            margin: 20px 0;
+        }
+        canvas {
+            width: 250px !important; /* Set canvas width */
+            height: 150px !important; /* Set canvas height */
+        }
+    </style>
+</head>
+<body>
+    <h1>Dropout Risk Analysis</h1>
+    <p>Number of students at risk: {{ at_risk_count }}</p>
+
+    <h2>Dropout Risk Distribution</h2>
+    <div class="chart-container">
+        <canvas id="dropoutRiskChart"></canvas>
+        <canvas id="clusterChart"></canvas>
+        <canvas id="riskFrequencyChart"></canvas>
+    </div>
+
+    <h2>CSV Data</h2>
+    <div id="csvData">{{ csv_table|safe }}</div>
+
+    <script>
+        // Function to parse CSV data into JSON
+        function parseCSVData(csvString) {
+            const lines = csvString.split("\n").filter(line => line.trim() !== ""); // Filter out empty lines
+            const headers = lines[0].split(",");
+            const data = lines.slice(1).map(line => {
+                const values = line.split(",");
+                const obj = {};
+                headers.forEach((header, index) => {
+                    obj[header.trim()] = values[index].trim();
+                });
+                return obj;
+            });
+            return data;
+        }
+
+        $(document).ready(function() {
+            const csvData = `{{ csv_table|tojson|safe }}`;
+            const parsedData = parseCSVData(csvData);
+
+            // Data for Dropout Risk Distribution
+            const dropoutRiskCounts = {};
+            parsedData.forEach(row => {
+                const risk = row["Dropout Risk"];
+                dropoutRiskCounts[risk] = (dropoutRiskCounts[risk] || 0) + 1;
+            });
+
+            const dropoutRiskLabels = Object.keys(dropoutRiskCounts);
+            const dropoutRiskData = Object.values(dropoutRiskCounts);
+
+            // Dropout Risk Distribution Chart
+            const dropoutRiskCtx = document.getElementById('dropoutRiskChart').getContext('2d');
+            new Chart(dropoutRiskCtx, {
+                type: 'bar',
+                data: {
+                    labels: dropoutRiskLabels,
+                    datasets: [{
+                        label: 'Number of Students',
+                        data: dropoutRiskData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Randomly assign clusters for visualization
+            const randomClusters = [];
+            const assignments = parsedData.map(row => parseFloat(row["Assignments"]) || Math.random() * 100);
+            const audioAssessment = parsedData.map(row => parseFloat(row["Audio Assessment"]) || Math.random() * 100);
+            const videoAssessment = parsedData.map(row => parseFloat(row["Video Assessment"]) || Math.random() * 100);
+            const textAssessment = parsedData.map(row => parseFloat(row["Text Assessment"]) || Math.random() * 100);
+
+            for (let i = 0; i < parsedData.length; i++) {
+                randomClusters.push(Math.floor(Math.random() * 2)); // Random cluster (0 or 1)
+            }
+
+            // Prepare data for scatter plot
+            const clusterData = assignments.map((assign, index) => ({
+                x: assign,
+                y: audioAssessment[index],
+                cluster: randomClusters[index]
+            }));
+
+            // Cluster Visualization Chart
+            const clusterCtx = document.getElementById('clusterChart').getContext('2d');
+            const scatterChart = new Chart(clusterCtx, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Cluster 0',
+                            data: clusterData.filter(p => p.cluster === 0),
+                            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                        },
+                        {
+                            label: 'Cluster 1',
+                            data: clusterData.filter(p => p.cluster === 1),
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Assignments Score'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Audio Assessment Score'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Generate histogram data for students at risk and not at risk
+            const riskFrequencyCounts = {
+                'At Risk': dropoutRiskCounts['1'] || 0,
+                'Not At Risk': dropoutRiskCounts['0'] || 0
+            };
+
+            const riskFrequencyLabels = Object.keys(riskFrequencyCounts);
+            const riskFrequencyData = Object.values(riskFrequencyCounts);
+
+            // Risk Frequency Histogram Chart
+            const riskFrequencyCtx = document.getElementById('riskFrequencyChart').getContext('2d');
+            new Chart(riskFrequencyCtx, {
+                type: 'bar',
+                data: {
+                    labels: riskFrequencyLabels,
+                    datasets: [{
+                        label: 'Number of Students',
+                        data: riskFrequencyData,
+                        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

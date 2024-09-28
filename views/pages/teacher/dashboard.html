@@ -1,0 +1,187 @@
+<%- include('../../partials/teacher/header.html')%>
+</head>
+
+<body>
+    <%- include('../../partials/teacher/sidebar.html')%>
+    <%- include('../../partials/teacher/navbar.html')%>    
+    
+   
+        <!-- ======================= Cards ================== -->
+        <div class="cardBox">
+
+            <a href="/assignments" style="text-decoration: none; color: inherit; ">
+            <div class="card">
+                <div>        
+                    <div class="cardName">Add Resource</div>
+                </div>
+
+                <div class="iconBx">
+                    <ion-icon name="book-outline"></ion-icon>
+                </div>
+            </div>
+            </a>
+            <a href="/doubtSession" style="text-decoration: none; color: inherit; ">
+                <div class="card">
+                    <div>       
+                        <div class="cardName">Doubt Session</div>
+                    </div>
+                    
+                    <div class="iconBx">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/teacherNotification" style="text-decoration: none; color: inherit; ">
+            <div class="card">
+                <div>
+                    <div class="cardName">Alerts</div>
+                </div>
+
+                <div class="iconBx">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+        </a>
+        <!-- ================ Order Details List ================= -->
+        <div class="details">
+            <div class="recentOrders">
+                <div class="cardHeader">
+                    <h2>Overall Student Analysis</h2>
+                    <a href="#" class="btn">View All</a>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name Of Student</td>
+                            <td>Interaction Time</td>
+                            <td>Dropout Possibility Status</td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Ram Deshpande</td>
+                            <td>12:14:20</td>
+                            <td><span class="status delivered">NO</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Neha Kanaki</td>
+                            <td>13:15:21</td>
+    
+                            <td><span class="status pending">NO</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Sushant Bangera</td>
+                            <td>06:05:13</td>
+                           
+                            <td><span class="status return">YES</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Pawan Vaidya</td>
+                            <td>11:05:20</td>
+                            
+                            <td><span class="status inProgress">NO</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Pranav Katake</td>
+                            <td>05:05:20</td>
+                            
+                            <td><span class="status delivered">YES</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Pratik Dhake </td>
+                            <td>07:13:12</td>
+                           
+                            <td><span class="status pending">YES</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Manish Shethye</td>
+                            <td>15:22:20</td>
+                            
+                            <td><span class="status return">NO</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Kalpak Kedari</td>
+                            <td>01:01:20</td>
+                         
+                            <td><span class="status inProgress">YES</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ================= New Customers ================ -->
+            <!-- <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Recent Communication</h2>
+                        <a href="#" class="btn">View All</a>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Person</td>
+                                <td>Topic </td>
+                                <td>Date</td>
+                                <td>Timing</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Student</td>
+                                <td>About Tables</td>
+                                <td>22/11/2023</td>
+                                <td>11:55 AM</td>
+                            </tr>
+
+                            <tr>
+                                <td>Parent</td>
+                                <td>Student Weak Points</td>
+                                <td>22/11/2023</td>
+                                <td>11:50 AM</td>
+                            </tr>
+
+                            <tr>
+                                <td>Student</td>
+                                <td>English Alphabets</td>
+                                <td>22/11/2023</td>
+                                <td>11:45 AM</td>
+                            </tr>
+
+                            <tr>
+                                <td>Parent</td>
+                                <td>Student irregular interaction</td>
+                                <td>21/11/2023</td>
+                                <td>11:40 AM</td>
+                            </tr>
+
+                            <tr>
+                                <td>Student</td>
+                                <td>Weak subjects</td>
+                                <td>20/11/2023</td>
+                                <td>11:35 AM</td>
+                            </tr>
+
+                            <tr>
+                                <td>Parent</td>
+                                <td>Students less marks</td>
+                                <td>20/11/2023</td>
+                                <td>11:30 AM</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div> -->
+<%- include('../../partials/teacher/footer.html')%>

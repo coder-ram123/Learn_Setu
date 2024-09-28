@@ -1,0 +1,105 @@
+<%- include('../../partials/teacher/header.html') %>
+<link rel="stylesheet" href="/css/teacher/assignments.css">
+</head>
+<body>
+    <%- include('../../partials/teacher/sidebar.html') %>
+    <%- include('../../partials/teacher/navbar.html') %>
+    
+    <div class="container">
+        <h1>Add Assignments</h1>
+        
+        <div class="form">
+            <!-- Type of Resource (Dropdown) -->
+            <label for="resourceType">Type of Resource:</label>
+            <select id="resourceType">
+                <option value="" disabled selected>Select resource type</option>
+                <!-- <option value="pdf">Text Tutorial</option>
+                <option value="video">Audio Tutorial</option>
+                <option value="audio">Video Tutorial</option>
+                <option value="quiz">Interactive Resources</option> -->
+            </select>
+
+            <!-- Type (Dropdown) -->
+            <label for="type">Type:</label>
+            <select id="type">
+                <option value="" disabled selected>Select type</option>
+                <!-- <option value="lecture">Lecture</option>
+                <option value="lab">Lab</option>
+                <option value="assignment">Assignment</option> -->
+            </select>
+            
+            <!-- Unit Number -->
+            <label for="unitNo">Unit No:</label>
+            <input type="number" id="unitNo" placeholder="Enter unit number">
+            
+            <!-- Unit Name -->
+            <label for="unitName">Unit Name:</label>
+            <input type="text" id="unitName" placeholder="Enter unit name">
+            
+            <!-- Number of Sessions -->
+            <label for="numSessions">Number of Sessions: (After adding click enter)</label>
+            <input type="number" id="numSessions" placeholder="Enter number of sessions" onchange="generateSessionFields()">
+            
+            <!-- Session Fields -->
+            <div id="sessionFields"></div>
+
+            <button id="addAssignmentBtn">Add Assignment</button>
+        </div>
+
+        <h2>Uploaded Assignments</h2>
+        <div id="assignmentList"></div>
+    </div>
+
+    <script src="../js/assignments.js"></script>
+    <script>
+        
+
+        function generateSessionFields() {
+            const numSessions = document.getElementById('numSessions').value;
+            const sessionFields = document.getElementById('sessionFields');
+            sessionFields.innerHTML = '';  // Clear previous session fields
+
+            for (let i = 1; i <= numSessions; i++) {
+                const sessionDiv = document.createElement('div');
+                sessionDiv.classList.add('session-display'); // Use new class for styling
+                
+                // Create label and input for session name
+                const sessionLabel = document.createElement('label');
+                sessionLabel.textContent = `Session ${i} Name:`;
+                const sessionInput = document.createElement('input');
+                sessionInput.type = 'text';
+                sessionInput.id = `sessionName${i}`;
+                sessionInput.placeholder = `Enter session ${i} name`;
+
+                // Create label and input for session file upload
+                const fileLabel = document.createElement('label');
+                fileLabel.textContent = `Upload Session ${i} File:`;
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.id = `sessionFile${i}`;
+                
+                // Create delete button for the session
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-session';
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => deleteSession(sessionDiv); // Add delete functionality
+                
+                // Append elements to sessionDiv
+                sessionDiv.appendChild(sessionLabel);
+                sessionDiv.appendChild(sessionInput);
+                sessionDiv.appendChild(fileLabel);
+                sessionDiv.appendChild(fileInput);
+                sessionDiv.appendChild(deleteButton); // Add delete button to sessionDiv
+                
+                // Append sessionDiv to sessionFields
+                sessionFields.appendChild(sessionDiv);
+            }
+        }
+
+        // Function to delete a session field
+        function deleteSession(sessionDiv) {
+            sessionDiv.remove();
+        }
+    </script>
+
+    <%- include('../../partials/teacher/footer.html') %>

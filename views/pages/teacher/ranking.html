@@ -1,0 +1,27 @@
+<%- include('../../partials/teacher/header.html') %>
+<link rel="stylesheet" href="/css/teacher/ranking.css">
+</head>
+
+<body>
+    <%- include('../../partials/teacher/sidebar.html') %>
+    <%- include('../../partials/teacher/navbar.html') %>
+
+    <div class="leaderboard-container"></div>
+        <h2>Leaderboard</h2>
+        <table id="leaderboard">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Student Name</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Leaderboard entries will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="../js/ranking.js"></script>
+   
+    <%- include('../../partials/teacher/footer.html') %>

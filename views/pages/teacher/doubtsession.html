@@ -1,0 +1,29 @@
+<%- include('../../partials/teacher/header.html')%>
+    <link rel="stylesheet" href="/css/teacher/doubtsession.css">
+</head>
+<body>
+    <%- include('../../partials/teacher/sidebar.html')%>
+    <%- include('../../partials/teacher/navbar.html')%>   
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chat with Your Teacher/Student</h2>
+        </div>
+        <div class="chat-box">
+            <div class="message received">
+                <p>Hello, how can I help you today?</p>
+                <span class="timestamp">10:00 AM</span>
+            </div>
+            <div class="message sent">
+                <p>I have a question about the homework.</p>
+                <span class="timestamp">10:05 AM</span>
+            </div>
+            <!-- More messages here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type your message...">
+            <button>Send</button>
+        </div>
+    </div>
+    <%- include('../../partials/teacher/footer.html')%>
+
+    

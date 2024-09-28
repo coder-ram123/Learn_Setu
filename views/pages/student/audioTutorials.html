@@ -1,0 +1,94 @@
+<%- include('../../partials/student/header.html') %>
+<link rel="stylesheet" href="/css/student/textTutorials.css">
+</head>
+
+<body>
+    <%- include('../../partials/student/sidebar.html') %>
+    <%- include('../../partials/student/navbar.html') %>
+
+    <!-- Main Content for Course Materials -->
+    <div class="content">
+        <div class="heading">Podcasts</div>
+
+        <!-- Units and Subunits -->
+        <div class="unit">
+            <div class="unit-header" onclick="toggleSubunits('unit1')">Unit 1: Life and Literature</div>
+            <div class="subunit-list" id="unit1">
+                <div class="subunit" onclick="playAudio(0)">1.1 Life</div>
+                <div class="subunit" onclick="playAudio(1)">1.2 A Synopsis - The Swiss Family Robinson</div>
+                <div class="subunit" onclick="playAudio(2)">1.3 Have you ever seen…?</div>
+            </div>
+        </div>
+
+        <div class="unit">
+            <div class="unit-header" onclick="toggleSubunits('unit2')">Unit 2: Poetry and Nature</div>
+            <div class="subunit-list" id="unit2">
+                <div class="subunit" onclick="playAudio(3)">2.1 Invictus</div>
+                <div class="subunit" onclick="playAudio(4)">2.2 A True Story of Sea Turtles</div>
+                <div class="subunit" onclick="playAudio(5)">2.3 Somebody’s Mother</div>
+            </div>
+        </div>
+
+        <!-- Audio Player -->
+        <audio id="audioPlayer" controls style="width: 100%; margin-top: 20px;">
+            <source id="audioSource" src="" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Previous and Next buttons -->
+        <div class="navigation-buttons">
+            <button class="btn" id="prevBtn" onclick="prevAudio()">Previous</button>
+            <button class="btn" id="nextBtn" onclick="nextAudio()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // List of audio files with correct paths
+        const audioFiles = [
+            '/audio/augusts.mp3',                        // 1.1 Life
+            '/audio/haveyou.mp3',                    // 1.2 A Synopsis - The Swiss Family Robinson
+            '/audio/life.mp3',                     // 1.3 Have you ever seen…?
+            '/audio/nidhi.mp3',                    // 2.1 Invictus
+            '/audio/swiss.mp3',                   // 2.2 A True Story of Sea Turtles
+            '/audio/true.mp3'              // 2.3 Somebody’s Mother
+        ];
+
+        let currentAudioIndex = -1; // Track the currently playing audio
+
+        // Function to show/hide subunit list on unit click
+        function toggleSubunits(unitId) {
+            const subunitList = document.getElementById(unitId);
+            subunitList.style.display = (subunitList.style.display === "block") ? "none" : "block";
+        }
+
+        // Function to play selected audio
+        function playAudio(index) {
+            currentAudioIndex = index; // Update the current index to the clicked session
+            const audioPlayer = document.getElementById('audioPlayer');
+            const audioSource = document.getElementById('audioSource');
+            audioSource.src = audioFiles[currentAudioIndex]; // Set the new audio file
+            audioPlayer.load(); // Load the new audio file
+            audioPlayer.play(); // Play the audio
+        }
+
+        // Function to play previous audio
+        function prevAudio() {
+            if (currentAudioIndex > 0) {
+                currentAudioIndex--;
+                playAudio(currentAudioIndex); // Play previous audio
+            }
+        }
+
+        // Function to play next audio
+        function nextAudio() {
+            if (currentAudioIndex < audioFiles.length - 1) {
+                currentAudioIndex++;
+                playAudio(currentAudioIndex); // Play next audio
+            }
+        }
+
+        // Load the first audio file by default when the page loads
+        playAudio(currentAudioIndex);
+    </script>
+
+    <%- include('../../partials/student/footer.html') %>

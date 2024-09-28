@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> LearnSetu </title>
+        <!-- Add Ample Display Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Ample+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      /* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Navbar Section */
+.navbar {
+    background-color: #2d2a8f;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center align the title */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+}
+/* Navbar Section */
+.navbar h1 {
+    font-family: 'Ample Display', sans-serif; /* Apply Ample Display font */
+    color: #fff;
+    font-size: 40px;  /* Increase size */
+    font-weight: 600;  /* Bold for stylish effect */
+    margin-bottom: 90px;
+    align-items: center;
+}
+
+
+/* Canva Logo */
+.logo {
+    width: 70px; /* Adjust the size as needed */
+    height: 70px;
+    align-items: center;
+    margin-bottom: 90px;
+}
+
+/* Header Section */
+.header {
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    position: relative;
+    margin-top: 80px; /* Space for the fixed navbar */
+    transition: background-image 0.5s ease-in-out; /* Smooth background image transition */
+}
+
+.header h2 {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.header .btn {
+    background-color: #ff624d;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.header .btn:hover {
+    background-color: #FF9933;
+}
+
+/* Introduction Section */
+.introduction {
+    padding: 50px 0;
+    text-align: center;
+    background-color: #fff;
+}
+
+.introduction h3 {
+    font-size: 36px;
+    color: #2d2a8f;
+    margin-bottom: 20px;
+}
+
+.introduction p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.introduction img {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer Section */
+.footer {
+    background-color: #2d2a8f;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer p {
+    margin: 0;
+}
+    </style>
+</head>
+<body>
+    <!-- Navbar Section -->
+    <div class="navbar container">
+        <img src="/images/ls4.png" alt="Canva Logo" class="logo"> <!-- Canva Logo -->
+        <h1>LearnSetu</h1>
+    </div>
+
+    <!-- Full-Width Header Section -->
+    <header class="header">
+        <h2>Reducing Student Dropout Rates</h2>
+        <p>Your future, our priority. Together, we can ensure no student is left behind.</p>
+        <a href="/login" class="btn">Get Started</a>
+    </header>
+
+    <!-- Introduction Section -->
+    <section class="introduction">
+        <h3>Welcome to  LearnSetu</h3>
+        <p>We are dedicated to providing tools and resources to help schools and institutions track, support, and retain students at risk of dropping out.</p>
+        <img src="/images/school.webp" alt="Students" />
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2024 LearnSetu. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript to change background images automatically -->
+    <script>
+        // Array of background images
+        const images = ['/images/sb.webp', '/images/sb1.jpg', '/images/sb4.webp', '/images/sb3.jpeg'];
+        let currentIndex = 0;
+
+        // Function to change the background image of the header
+        function changeBackground() {
+            const header = document.querySelector('.header');
+            header.style.backgroundImage = `url(${images[currentIndex]})`;
+            currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        // Call the changeBackground function every 5 seconds (5000 milliseconds)
+        setInterval(changeBackground, 5000);
+    </script>
+
+</body>
+</html>

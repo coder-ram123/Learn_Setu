@@ -1,0 +1,65 @@
+<%- include('../../partials/student/header.html') %>
+<link rel="stylesheet" href="/css/student/chat.css">
+</head>
+<body>
+    <%- include('../../partials/student/sidebar.html') %>
+    <%- include('../../partials/student/navbar.html') %>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>ShikshaMitra!</h2>
+        </div>
+        <div id="chat-box" class="chat-box">
+            <!-- Chat history will appear here -->
+        </div>
+        <form id="chat-form">
+            <input type="text" id="user-input" placeholder="Enter your question here" required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <div id="loader" style="display:none;">
+        <img src="/images/loader.gif" width="150px" alt="Loading...">
+    </div>
+s
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const form = document.getElementById('chat-form');
+        const loader = document.getElementById('loader');
+
+        async function sendMessage() {
+            const userMessage = userInput.value.trim();
+            if (!userMessage) return;  // Prevent empty submissions
+            userInput.value = '';  // Clear input field
+
+            // Append user message to chat history
+            chatBox.innerHTML += `<div class="user-message"><strong>You:</strong> ${userMessage}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;  // Auto-scroll
+
+            try {
+                loader.style.display = 'block';  // Show loader
+                const response = await fetch('/aichat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userInput: userMessage })
+                });
+                
+                const data = await response.json();
+                const botMessage = data.response;
+
+                // Append bot message to chat history
+                chatBox.innerHTML += `<div class="bot-message"><strong>Bot:</strong> ${botMessage}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;  // Auto-scroll
+            } catch (error) {
+                console.error('Error:', error);
+                chatBox.innerHTML += `<div class="bot-message error"><strong>Error:</strong> Unable to get a response.</div>`;
+            } finally {
+                loader.style.display = 'none';  // Hide loader
+            }
+        }
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();  // Prevent form submission
+            sendMessage();
+        });
+    </script>
+    <%- include('../../partials/student/footer.html') %>

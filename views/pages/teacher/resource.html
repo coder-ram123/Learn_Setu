@@ -1,0 +1,29 @@
+<%- include('../../partials/teacher/header.html') %>
+<link rel="stylesheet" href="/css/teacher/resource.css">  
+</head>
+<body>
+    <%- include('../../partials/teacher/sidebar.html') %>
+    <%- include('../../partials/teacher/navbar.html') %>
+    <div class="container">
+        <h1>Add Assignments</h1>
+        
+        <div class="form">
+            <label for="unitName">Unit Name:</label>
+            <input type="text" id="unitName" placeholder="Enter unit name">
+            
+            <label for="unitName">Resource Name:</label>
+            <input type="text" id="resName" placeholder="Resource">
+
+            <label for="assignmentFile">Assignment File:</label>
+            <input type="file" id="assignmentFile">
+            
+            <button id="addAssignmentBtn">Add Resource</button>
+        </div>
+
+        <h2>Uploaded Resources</h2>
+        <div id="assignmentList"></div>
+    </div>
+
+    <script src="../js/resource.js"></script>
+   
+    <%- include('../../partials/teacher/footer.html') %>
